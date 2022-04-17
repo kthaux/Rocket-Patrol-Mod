@@ -67,7 +67,22 @@ class Play extends Phaser.Scene
             },
             fixedWidth: 100
         }
+
+        let timeConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#FFFFF',
+            color: '#843605',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+        
 
         // GAME OVER flag
         this.gameOver = false;
@@ -79,6 +94,10 @@ class Play extends Phaser.Scene
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
+
+        this.remaining = this.clock.getRemainingSeconds();
+
+        this.timeLeft = this.add.text(borderUISize + borderPadding*43, borderUISize + borderPadding*2, this.remaining, timeConfig);
     }
 
     update()
@@ -95,6 +114,8 @@ class Play extends Phaser.Scene
 
         //scroll background on update
         this.starfield.tilePositionX -= 4;
+
+        this.timeLeft.text = this.clock.getRemainingSeconds();
 
         //update rocket and spaceships while game is not over
         if (!this.gameOver) {               
