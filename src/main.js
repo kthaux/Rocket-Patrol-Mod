@@ -1,10 +1,17 @@
-console.log("hello from main.js");
 /*
+Name: Keaton Haux(kthaux)(Knackington) accidentally used my other github account to contribute to my repository
+Title: Vampire Hunter
+Date: 4/16/2022
+
 $Redesign the game's artwork, UI, and sound to change its theme/aesthetic (to something other than sci-fi) (60)
 -- SpaceShips->Bats Rocket->Arrow Starfield->Cloudy Night Sky Explosions->Blood Splats Base sounds->Custom sounds
+
 $Display the time remaining (in seconds) on the screen (10)
+
 $Implement a new timing/scoring mechanism that adds time to the clock for successful hits (20)
+
 $Track a high score that persists across scenes and display it in the UI (5)
+
 $Allow the player to control the Rocket after it's fired (5)
 */
 let config = 
