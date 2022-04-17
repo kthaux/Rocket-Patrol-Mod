@@ -173,9 +173,31 @@ class Play extends Phaser.Scene
           boom.destroy();                       // remove explosion sprite
         });
 
+
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 100
+        }
+
         // score add and repaint
         this.p1Score += ship.points;
-        this.scoreLeft.text = this.p1Score;  
+        this.scoreLeft.text = this.p1Score; 
+        let remaining = this.clock.getRemaining(); 
+        this.clock.remove();
+        this.clock = this.time.delayedCall(remaining + 5000, () => {
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
+            this.gameOver = true;
+        }, null, this);
+
         //play explosion sound
         this.sound.play('sfx_explosion');
     }
