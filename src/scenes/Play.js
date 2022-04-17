@@ -53,7 +53,7 @@ class Play extends Phaser.Scene
 
         // initialize score
         this.p1Score = 0;
-
+        
           // display score
         let scoreConfig = {
             fontFamily: 'Courier',
@@ -66,6 +66,19 @@ class Play extends Phaser.Scene
             bottom: 5,
             },
             fixedWidth: 100
+        }
+
+        let highScoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#00000',
+            color: '#68030a',
+            align: 'right',
+            padding: {
+            top: 5,
+            bottom: 5,
+            },
+            fixedWidth: 150
         }
 
         let timeConfig = {
@@ -82,7 +95,7 @@ class Play extends Phaser.Scene
         }
 
         this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-        
+        this.saveScore = this.add.text(borderUISize + borderPadding*20, borderUISize + borderPadding*2, `High:${highScore}`, highScoreConfig);
 
         // GAME OVER flag
         this.gameOver = false;
@@ -104,9 +117,17 @@ class Play extends Phaser.Scene
     {
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR))
         {
-            this.scene.restart();
+            if(this.p1Score > highScore)
+                highScore = this.p1Score;
+            this.scene.restart(highScore);
         }
-        
+        //highscore
+        if(this.p1Score > highScore)
+        {
+            highScore = this.p1Score;
+            this.saveScore.setText(`High:${highScore}`);
+        }
+
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) 
         {
             this.scene.start("menuScene");
@@ -177,14 +198,13 @@ class Play extends Phaser.Scene
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#00000',
+            color: '#68030a',
             align: 'right',
             padding: {
             top: 5,
             bottom: 5,
-            },
-            fixedWidth: 100
+            }
         }
 
         // score add and repaint
@@ -196,6 +216,7 @@ class Play extends Phaser.Scene
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
+            
         }, null, this);
 
         //play explosion sound

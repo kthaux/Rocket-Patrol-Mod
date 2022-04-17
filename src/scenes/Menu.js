@@ -28,7 +28,7 @@ class Menu extends Phaser.Scene
             fixedWidth: 0
         }
 
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'Vampire Hunter', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'Use <- -> arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#a41f28';
         menuConfig.color = '#000';
@@ -54,7 +54,7 @@ class Menu extends Phaser.Scene
             // hard mode
             game.settings = {
               spaceshipSpeed: 4,
-              gameTimer: 45000    
+              gameTimer: 15000    
             }
             this.sound.play('sfx_select');
             this.scene.start('playScene');    
